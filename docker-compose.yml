@@ -104,7 +104,7 @@ services:
 
   # OpenVPN client container
   openvpn:
-    image: dperson/openvpn-client:latest
+    image: docker.io/dperson/openvpn-client:latest
     container_name: openvpn
     cap_add:
       - NET_ADMIN
@@ -122,6 +122,10 @@ services:
       - /dev/net/tun
     restart: unless-stopped
     command: '-f "" -r 192.168.0.0/16'
+    networks:
+      default:
+        aliases:
+          - qbittorrent  # Allow other containers to reach qBittorrent via this name
 
   # qBittorrent bound to OpenVPN
   qbittorrent:
