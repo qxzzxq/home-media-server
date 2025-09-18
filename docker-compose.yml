@@ -4,11 +4,12 @@ services:
   plex:
     image: lscr.io/linuxserver/plex:latest
     container_name: plex
+    userns_mode: "keep-id"
     network_mode: host
-    user: 1000:1000
+    # user: 1000:1000
     environment:
-      # - PUID=1000
-      # - PGID=1000
+      - PUID=1000
+      - PGID=1000
       - TZ=America/Denver
       - VERSION=docker
     volumes:
@@ -23,12 +24,12 @@ services:
 
   sonarr:
     image: lscr.io/linuxserver/sonarr:latest
-    # userns_mode: "keep-id"
-    user: 1000:1000
+    userns_mode: "keep-id"
+    # user: 1000:1000
     container_name: sonarr
     environment:
-      # - PUID=1000
-      # - PGID=1000
+      - PUID=1000
+      - PGID=1000
       - TZ=America/Denver
     volumes:
       - ./config/sonarr:/config
@@ -44,12 +45,12 @@ services:
 
   radarr:
     image: lscr.io/linuxserver/radarr:latest
-    # userns_mode: "keep-id"
-    user: 1000:1000
+    userns_mode: "keep-id"
+    # user: 1000:1000
     container_name: radarr
     environment:
-      # - PUID=1000
-      # - PGID=1000
+      - PUID=1000
+      - PGID=1000
       - TZ=America/Denver
     volumes:
       - ./config/radarr:/config
@@ -65,12 +66,12 @@ services:
 
   prowlarr:
     image: lscr.io/linuxserver/prowlarr:latest
-    # userns_mode: "keep-id"
-    user: 1000:1000
+    userns_mode: "keep-id"
+    # user: 1000:1000
     container_name: prowlarr
     environment:
-      # - PUID=1000
-      # - PGID=1000
+      - PUID=1000
+      - PGID=1000
       - TZ=America/Denver
     volumes:
       - ./config/prowlarr:/config
@@ -82,12 +83,12 @@ services:
 
   jackett:
     image: lscr.io/linuxserver/jackett:latest
-    # userns_mode: "keep-id"
-    user: 1000:1000
+    userns_mode: "keep-id"
+    # user: 1000:1000
     container_name: jackett
     environment:
-      # - PUID=1000
-      # - PGID=1000
+      - PUID=1000
+      - PGID=1000
       - TZ=America/Denver
       - AUTO_UPDATE=true #optional
     volumes:
@@ -101,7 +102,6 @@ services:
 
   flaresolverr:
     image: ghcr.io/flaresolverr/flaresolverr:latest
-    userns_mode: "keep-id"
     container_name: flaresolverr
     environment:
       - LOG_LEVEL=${LOG_LEVEL:-info}
@@ -115,7 +115,6 @@ services:
   # OpenVPN client container
   openvpn:
     image: docker.io/dperson/openvpn-client:latest
-    userns_mode: "keep-id"
     container_name: openvpn
     cap_add:
       - NET_ADMIN
@@ -141,13 +140,13 @@ services:
   # qBittorrent bound to OpenVPN
   qbittorrent:
     image: lscr.io/linuxserver/qbittorrent:latest
-    # userns_mode: "keep-id"
-    user: 1000:1000
+    userns_mode: "keep-id"
+    # user: 1000:1000
     container_name: qbittorrent
     network_mode: "service:openvpn"
     environment:
-      # - PUID=1000
-      # - PGID=1000
+      - PUID=1000
+      - PGID=1000
       - TZ=America/Denver
       - WEBUI_PORT=8080
       - TORRENTING_PORT=6881
