@@ -1,7 +1,9 @@
 version: "3.8"
 
 # if you are using rootless podman, do not forget to fix the ownership of the config folders:
-# podman unshare chown -R 1000:1000 /volumes/to/be/mounted
+# podman unshare chown -R 1000:1000 ./config
+# podman unshare chown -R 1000:1000 ${MEDIA_ROOT}
+# podman unshare chown -R 1000:1000 ${DOWNLOADS_ROOT}
 
 services:
   plex:
