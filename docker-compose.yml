@@ -1,5 +1,8 @@
 version: "3.8"
 
+# if you are using rootless podman, do not forget to fix the ownership of the config folders:
+# podman unshare chown -R 1000:1000 /volumes/to/be/mounted
+
 services:
   plex:
     image: lscr.io/linuxserver/plex:latest
